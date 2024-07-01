@@ -53,6 +53,7 @@ function Index() {
           <DialogContent>
             <TransactionForm
               onSave={handleSaveTransaction}
+              onCancel={() => setIsEditing(false)}
               transaction={currentTransaction}
               isEditing={isEditing}
             />
@@ -107,7 +108,7 @@ function Index() {
   );
 }
 
-function TransactionForm({ onSave, transaction, isEditing }) {
+function TransactionForm({ onSave, onCancel, transaction, isEditing }) {
   const [date, setDate] = useState(transaction?.date || "");
   const [amount, setAmount] = useState(transaction?.amount || "");
   const [type, setType] = useState(transaction?.type || "Income");
@@ -169,7 +170,7 @@ function TransactionForm({ onSave, transaction, isEditing }) {
         </div>
       </div>
       <div className="mt-4 flex justify-end space-x-2">
-        <Button type="button" variant="outline" onClick={() => setIsEditing(false)}>
+        <Button type="button" variant="outline" onClick={onCancel}>
           Cancel
         </Button>
         <Button type="submit">Save</Button>
